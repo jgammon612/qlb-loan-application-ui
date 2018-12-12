@@ -2,7 +2,7 @@
 angular.module('demo', [])
 .controller('kie-server-info', function($scope, $http) {
 
-    $http.get('http://localhost:8080/kie-server/services/rest/server', {
+    $http.get('http://rhpam7-install-kieserver-rhpam7-install-opentlc-mgr.apps.plano-77ab.openshiftworkshop.com/services/rest/server', {
         headers: {'accept' : 'application/json', 'content-type' : 'application/json' ,'Authorization': 'Basic ' + btoa('dsUser:dsUser1!') }
     }).
         then(function(response) {
@@ -22,7 +22,7 @@ angular.module('demo', [])
 
     $scope.fireRules = function(){
         console.log("fireRules! ");  
-        $http.post('http://localhost:8080/kie-server/services/rest/server/containers/instances/loan-application', '{ \"lookup\": \"default-stateless-ksession\", \"commands\": [ { \"insert\": { \"object\": { \"com.redhat.demo.qlb.loan_application.model.Applicant\": { \"creditScore\":'+$scope.applicant.creditScore+', \"name\":\"'+$scope.applicant.name+'\", \"age\":'+$scope.applicant.age+', \"yearlyIncome\":'+$scope.applicant.yearlyIncome+' } }, \"out-identifier\":\"applicant\" } }, { \"insert\": { \"object\": { \"com.redhat.demo.qlb.loan_application.model.Loan\": { \"amount\":'+$scope.loan.amount+', \"duration\":'+$scope.loan.duration+' } }, \"out-identifier\":\"loan\" } }, { \"start-process\" : { \"processId\" : \"loan-application.loan-application-decision-flow\", \"parameter\" : [ ], \"out-identifier\" : null } } ]}' ,{
+        $http.post('http://rhpam7-install-kieserver-rhpam7-install-opentlc-mgr.apps.plano-77ab.openshiftworkshop.com/services/rest/server/containers/loan-application_1.0', '{ \"lookup\": \"default-stateless-ksession\", \"commands\": [ { \"insert\": { \"object\": { \"com.redhat.demo.qlb.loan_application.model.Applicant\": { \"creditScore\":'+$scope.applicant.creditScore+', \"name\":\"'+$scope.applicant.name+'\", \"age\":'+$scope.applicant.age+', \"yearlyIncome\":'+$scope.applicant.yearlyIncome+' } }, \"out-identifier\":\"applicant\" } }, { \"insert\": { \"object\": { \"com.redhat.demo.qlb.loan_application.model.Loan\": { \"amount\":'+$scope.loan.amount+', \"duration\":'+$scope.loan.duration+' } }, \"out-identifier\":\"loan\" } }, { \"start-process\" : { \"processId\" : \"loan-application.loan-application-decision-flow\", \"parameter\" : [ ], \"out-identifier\" : null } } ]}' ,{
         headers: {'Authorization': 'Basic ' + btoa('dsUser:dsUser1!') }
         }).
             then(function(response) {
